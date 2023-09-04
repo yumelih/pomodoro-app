@@ -1,0 +1,19 @@
+.container {
+  position: relative;
+}
+
+.timer {
+  font-size: 10rem;
+  color: #f6f6f6;
+  user-select: none;
+  cursor: pointer;
+}
+
+.timer:active {
+  color: #e4e4e4;
+  font-size: 9.8rem;
+}
+
+.timerDisabled {
+  cursor: grab;
+}

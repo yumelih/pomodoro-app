@@ -1,0 +1,14 @@
+.btn {
+  margin: 1rem auto;
+  color: #d7d7d7;
+  background-color: inherit;
+  border: none;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: #4a4a4a;
+}

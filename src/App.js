@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Title from "./components/Title";
+import AppNav from "./components/AppNav";
+import ProgressBar from "./components/ProgressBar";
 
 function App() {
+  // const [minutes, setMinutes] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title title="Pomodoro" />
+      <AppNav />
+      <ProgressBar
+        // min={Number(minutes)}
+        isRunning={isRunning}
+        onRunning={setIsRunning}
+      />
+      {/* <Timer
+        min={Number(minutes)}
+        isRunning={isRunning}
+        onRunning={setIsRunning}
+      />
+      <SelectTime type="min" limit="480" setTime={setMinutes} />
+      <button onClick={() => setIsRunning(true)}>Start the Timer</button> */}
     </div>
   );
 }
