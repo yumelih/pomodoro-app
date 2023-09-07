@@ -1,5 +1,11 @@
 .circleBar {
-  width: 50rem;
-  height: 50rem;
+  width: 60rem;
+  height: 60rem;
   margin: 0 auto;
+  padding: 3rem;
+  border-radius: 50%;
+  box-shadow: -10px -10px 40px 0px rgba(255, 255, 255, 0.3);
+  border: 2rem solid #1c2138;
+
+  background: linear-gradient(to right bottom, #111423, #1c2138);
 }

@@ -45,7 +45,7 @@ function Timer({
   return (
     <div className={styles.container}>
       <div
-        className={`${styles.timer} ${isRunning ? styles.timerDisabled : ""}}`}
+        className={`${styles.timer} ${isRunning ? styles.timerDisable : ""}`}
         onClick={handleClick}
       >
         {minutes < 10 ? "0" + minutes : minutes}:

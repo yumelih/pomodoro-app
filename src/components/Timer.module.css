@@ -9,11 +9,11 @@
   cursor: pointer;
 }
 
+.timerDisable {
+  pointer-events: none;
+}
+
 .timer:active {
   color: #e4e4e4;
   font-size: 9.8rem;
-}
-
-.timerDisabled {
-  cursor: grab;
 }
