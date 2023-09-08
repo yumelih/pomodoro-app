@@ -1,17 +1,13 @@
 import { useState } from "react";
 import styles from "./AppNav.module.css";
 
-const typesOfTimer = [
-  { id: 1, title: "pomodoro" },
-  { id: 2, title: "short break" },
-  { id: 3, title: "long break" },
-];
+const typesOfTimer = ["pomodoro", "short break", "long break"];
 
 function AppNav() {
-  const [selectedType, setSelectedType] = useState(typesOfTimer.at(0).id);
+  const [selectedType, setSelectedType] = useState(typesOfTimer.at(0));
 
-  function handleClick(id) {
-    setSelectedType(id);
+  function handleClick(item) {
+    setSelectedType(item);
   }
 
   return (
@@ -19,13 +15,13 @@ function AppNav() {
       {typesOfTimer.map((item) => {
         return (
           <li
-            key={item.id}
+            key={item}
             className={`${styles.list__item} ${
-              selectedType === item.id ? styles.list__itemActive : ""
+              selectedType === item ? styles.list__itemActive : ""
             }`}
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item)}
           >
-            {item.title}
+            {item}
           </li>
         );
       })}

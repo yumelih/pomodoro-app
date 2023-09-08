@@ -1,31 +1,32 @@
+import { useTimer } from "../contexts/TimerContext";
 import styles from "./SelectTime.module.css";
 import { memo, useState } from "react";
 
 function time(type, limit) {
   return Array.from({ length: Number(limit) }, (_, index) => {
     return (
-      <option value={index} key={index}>
-        {index} {type}
+      <option value={index + 1} key={index + 1}>
+        {index + 1} {type}
       </option>
     );
   });
 }
 
-function SelectTime({ type, limit, setTime }) {
-  const [selectedTime, setSelectedTime] = useState(0);
+const type = "min";
+const limit = "480";
 
-  function handleChange(e) {
-    setTime(e.target.value);
-    setSelectedTime(e.target.value);
-  }
+function SelectTime() {
+  const { selectedMinutes, dispatch } = useTimer();
 
-  //   console.log(selectedTime);
+  console.log(selectedMinutes);
 
   return (
     <>
       <select
-        value={selectedTime}
-        onChange={handleChange}
+        value={selectedMinutes}
+        onChange={(e) =>
+          dispatch({ type: "timer/updateminutes", payload: e.target.value })
+        }
         className={styles.changeTime}
       >
         {time(type, limit)}

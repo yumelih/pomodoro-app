@@ -1,8 +1,13 @@
+import { useTimer } from "../contexts/TimerContext";
 import styles from "./StartPauseTimer.module.css";
 
-function StartPauseTimer({ isRunning, onRunning }) {
+function StartPauseTimer() {
+  const { isRunning, dispatch } = useTimer();
+
   function handleClick() {
-    onRunning((prev) => !prev);
+    isRunning
+      ? dispatch({ type: "timer/pause" })
+      : dispatch({ type: "timer/start" });
   }
 
   return (

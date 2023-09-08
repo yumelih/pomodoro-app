@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTimer } from "../contexts/TimerContext";
 import stylesModule from "./ProgressBar.module.css";
 import {
   CircularProgressbarWithChildren,
@@ -29,10 +30,8 @@ const styles = {
   backgroundColor: "#3e98c7",
 };
 
-function ProgressBar({ isRunning, onRunning }) {
-  const [secondsRemaining, setSecondsRemaining] = useState(0);
-
-  const [minutes, setMinutes] = useState(1);
+function ProgressBar() {
+  const { secondsRemaining, selectedMinutes } = useTimer();
 
   return (
     <div className={stylesModule.circleBar}>
@@ -40,19 +39,11 @@ function ProgressBar({ isRunning, onRunning }) {
         styles={buildStyles(styles)}
         value={secondsRemaining}
         minValue={0}
-        maxValue={Number(minutes) * 60}
+        maxValue={Number(selectedMinutes) * 60}
         strokeWidth={4}
       >
-        <Timer
-          min={Number(minutes)}
-          isRunning={isRunning}
-          onRunning={onRunning}
-          secondsRemaining={secondsRemaining}
-          setSecondsRemaining={setSecondsRemaining}
-          setMinutes={setMinutes}
-        />
-
-        <StartPauseTimer isRunning={isRunning} onRunning={onRunning} />
+        <Timer />
+        <StartPauseTimer />
       </CircularProgressbarWithChildren>
     </div>
   );
