@@ -1,13 +1,16 @@
 import { useState } from "react";
 import styles from "./AppNav.module.css";
+import { useTimer } from "../contexts/TimerContext";
 
 const typesOfTimer = ["pomodoro", "short break", "long break"];
 
 function AppNav() {
-  const [selectedType, setSelectedType] = useState(typesOfTimer.at(0));
+  const { secondsRemaining, selectedMinutes, isRunning, phase, dispatch } =
+    useTimer();
 
   function handleClick(item) {
-    setSelectedType(item);
+    if (isRunning || secondsRemaining < selectedMinutes * 60) return;
+    dispatch({ type: "timer/selectphase", payload: item });
   }
 
   return (
@@ -17,7 +20,7 @@ function AppNav() {
           <li
             key={item}
             className={`${styles.list__item} ${
-              selectedType === item ? styles.list__itemActive : ""
+              phase === item ? styles.list__itemActive : ""
             }`}
             onClick={() => handleClick(item)}
           >

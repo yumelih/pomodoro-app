@@ -5,9 +5,10 @@ const TimerContext = createContext();
 const initialState = {
   isRunning: false,
   isDropdownOpen: false,
-  secondsRemaining: 0,
-  selectedMinutes: 0,
+  secondsRemaining: 60,
+  selectedMinutes: 1,
   phase: "pomodoro",
+  pomodoroCount: 0,
 };
 
 function reducer(state, action) {
@@ -30,10 +31,15 @@ function reducer(state, action) {
         secondsRemaining: action.payload * 60,
         isDropdownOpen: false,
       };
+    case "timer/selectphase": {
+      return { ...state, phase: action.payload };
+    }
     case "timer/pomodoroend":
-      return { ...state, isRunning: false, secondsRemaining: 0 };
-    case "timer/breakend":
-      return { ...state, isRunning: false, secondsRemaining: 0 };
+      return { ...initialState, phase: "short break" };
+    case "timer/shortbreakend":
+      return {
+        ...initialState,
+      };
 
     default:
       throw new Error("This action.type does not exist");
@@ -42,20 +48,23 @@ function reducer(state, action) {
 
 function TimerProvider({ children }) {
   const [
-    { isRunning, isDropdownOpen, secondsRemaining, selectedMinutes },
+    {
+      isRunning,
+      isDropdownOpen,
+      secondsRemaining,
+      selectedMinutes,
+      phase,
+      pomodoroCount,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  // useEffect(
-  //   function () {
-  //     dispatch({ type: "timer/updateminutes", payload: selectedMinutes });
-  //   },
-  //   [selectedMinutes]
-  // );
-
   useEffect(
     function () {
-      if (secondsRemaining === 0) dispatch({ type: "timer/pomodoroend" });
+      if (secondsRemaining === 0 && phase === "pomodoro")
+        dispatch({ type: "timer/pomodoroend" });
+      if (secondsRemaining === 0 && phase === "short break")
+        dispatch({ type: "timer/shortbreakend" });
 
       if (isRunning && secondsRemaining > 0) {
         const interval = setInterval(() => {
@@ -64,7 +73,7 @@ function TimerProvider({ children }) {
         return () => clearInterval(interval);
       }
     },
-    [secondsRemaining, isRunning]
+    [secondsRemaining, isRunning, phase]
   );
 
   return (
@@ -74,6 +83,8 @@ function TimerProvider({ children }) {
         isDropdownOpen,
         secondsRemaining,
         selectedMinutes,
+        phase,
+        pomodoroCount,
         dispatch,
       }}
     >
