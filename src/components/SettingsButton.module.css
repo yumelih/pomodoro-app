@@ -1,0 +1,16 @@
+.settingsBtn {
+  display: block;
+  margin: 4rem auto;
+  width: 4rem;
+  height: auto;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.settingsBtn:hover {
+  transform: rotate(90deg);
+}
+
+.settingsBtn:active {
+  opacity: 75%;
+}

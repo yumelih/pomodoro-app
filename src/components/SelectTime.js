@@ -1,6 +1,6 @@
 import { useTimer } from "../contexts/TimerContext";
 import styles from "./SelectTime.module.css";
-import { memo, useState } from "react";
+import { memo } from "react";
 
 function time(type, limit) {
   return Array.from({ length: Number(limit) }, (_, index) => {

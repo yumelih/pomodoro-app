@@ -1,14 +1,20 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { act } from "react-dom/test-utils";
 
 const TimerContext = createContext();
 
 const initialState = {
   isRunning: false,
   isDropdownOpen: false,
-  secondsRemaining: 60,
-  selectedMinutes: 1,
+  secondsRemaining: 1500,
+  selectedMinutes: 25,
   phase: "pomodoro",
   pomodoroCount: 0,
+  userSelected: {
+    time: { pomodoroTime: 25, shortBreakTime: 5, longBreakTime: 20 },
+    color: "red",
+    font: "serif",
+  },
 };
 
 function reducer(state, action) {
@@ -35,10 +41,50 @@ function reducer(state, action) {
       return { ...state, phase: action.payload };
     }
     case "timer/pomodoroend":
-      return { ...initialState, phase: "short break" };
-    case "timer/shortbreakend":
+      const updatedPomodoroCount = state.pomodoroCount + 1;
+      const newPhase =
+        updatedPomodoroCount === 4 ? "long break" : "short break"; // changed from 3 to 4 for a pomodoro cycle of 4
+
+      const newSelectedMinutes =
+        newPhase === "long break"
+          ? state.userSelected.time.longBreakTime
+          : state.userSelected.time.shortBreakTime;
+
       return {
         ...initialState,
+        pomodoroCount: updatedPomodoroCount,
+        phase: newPhase,
+        selectedMinutes: newSelectedMinutes,
+        secondsRemaining: newSelectedMinutes * 60,
+      };
+    case "timer/breakend":
+      const selectedMinutes = state.userSelected.time.pomodoroTime;
+      const pomodoroSecondsRemaining = selectedMinutes * 60;
+      return {
+        ...initialState,
+        selectedMinutes,
+        secondsRemaining: pomodoroSecondsRemaining,
+        pomodoroCount: state.phase === "short break" ? state.pomodoroCount : 0,
+      };
+    case "timer/settingschange":
+      const pomodoroTime = action.payload.time.pomodoroTime;
+      const secondsRemaining = pomodoroTime * 60;
+
+      return {
+        ...state,
+        phase: "pomodoro",
+        selectedMinutes: pomodoroTime,
+        secondsRemaining,
+
+        userSelected: {
+          time: {
+            pomodoroTime,
+            shortBreakTime: action.payload.time.shortBreakTime,
+            longBreakTime: action.payload.time.longBreakTime,
+          },
+          color: action.payload.color,
+          font: action.payload.font,
+        },
       };
 
     default:
@@ -55,6 +101,7 @@ function TimerProvider({ children }) {
       selectedMinutes,
       phase,
       pomodoroCount,
+      userSelected,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -63,8 +110,8 @@ function TimerProvider({ children }) {
     function () {
       if (secondsRemaining === 0 && phase === "pomodoro")
         dispatch({ type: "timer/pomodoroend" });
-      if (secondsRemaining === 0 && phase === "short break")
-        dispatch({ type: "timer/shortbreakend" });
+      if (secondsRemaining === 0 && phase !== "pomodoro")
+        dispatch({ type: "timer/breakend" });
 
       if (isRunning && secondsRemaining > 0) {
         const interval = setInterval(() => {
@@ -86,6 +133,7 @@ function TimerProvider({ children }) {
         phase,
         pomodoroCount,
         dispatch,
+        userSelected,
       }}
     >
       {children}

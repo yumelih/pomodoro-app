@@ -2,7 +2,9 @@
   --background-color: #232946;
 
   --title-color: #bbbbbb;
-  --accent-color: #f25f4c;
+  --accent-red-color: #f25f4c;
+  --accent-blue-color: #3772ff;
+  --accent-purple-color: #d63af9;
   --text-light-color: #72757e;
   --text-dark-color: #121629;
 }

@@ -1,0 +1,22 @@
+.label {
+  color: rgb(100, 100, 100);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.customSelect {
+  position: relative;
+  appearance: none;
+  padding: 1.5rem 10rem 1.5rem 1.5rem;
+  background-color: rgba(230, 230, 230, 0.753);
+  background-image: url("../../public/arrows.svg");
+  background-position: right 1.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+}
+
+.customSelect:focus {
+  outline: 1px solid rgb(182, 180, 180);
+}

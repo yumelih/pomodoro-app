@@ -17,7 +17,7 @@
 }
 
 .list__itemActive {
-  background-color: var(--accent-color);
+  background-color: var(--accent-red-color);
   color: var(--text-dark-color);
   border-radius: 10rem;
   border: none;

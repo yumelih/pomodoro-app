@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./AppNav.module.css";
 import { useTimer } from "../contexts/TimerContext";
 
