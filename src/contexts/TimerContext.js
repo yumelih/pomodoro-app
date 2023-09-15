@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { act } from "react-dom/test-utils";
 
 const TimerContext = createContext();
 
@@ -121,6 +120,41 @@ function TimerProvider({ children }) {
       }
     },
     [secondsRemaining, isRunning, phase]
+  );
+
+  useEffect(
+    function () {
+      let selectedColor;
+      if (userSelected.color === "purple") {
+        selectedColor = "#d63af9";
+      } else if (userSelected.color === "blue") {
+        selectedColor = "#3772ff";
+      } else {
+        selectedColor = "#f25f4c";
+      }
+
+      document.documentElement.style.setProperty(
+        "--accent-main-color",
+        selectedColor
+      );
+    },
+    [userSelected.color]
+  );
+
+  useEffect(
+    function () {
+      let selectedFont;
+      if (userSelected.font === "system-ui") {
+        selectedFont = "Satisfy', cursive";
+      } else if (userSelected.font === "serif") {
+        selectedFont = "Bebas Neue, sans-serif";
+      } else {
+        selectedFont = "Oswald, sans-serif";
+      }
+
+      document.documentElement.style.setProperty("--main-font", selectedFont);
+    },
+    [userSelected.font]
   );
 
   return (

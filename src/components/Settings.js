@@ -11,14 +11,14 @@ const fontClassName = "modal__font";
 
 function Settings({ onSettingsOpen }) {
   const { userSelected, dispatch } = useTimer();
-  const { time } = userSelected;
+  const { time, color, font } = userSelected;
 
   const [selectedPomodoro, setSelectedPomodoro] = useState(time.pomodoroTime);
   const [selectedShort, setSelectedShort] = useState(time.shortBreakTime);
   const [selectedLong, setSelectedLong] = useState(time.longBreakTime);
 
-  const [selectedColor, setSelectedColor] = useState("red");
-  const [selectedFont, setSelectedFont] = useState("serif");
+  const [selectedColor, setSelectedColor] = useState(color);
+  const [selectedFont, setSelectedFont] = useState(font);
 
   function handleSubmit(e) {
     e.preventDefault();

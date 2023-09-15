@@ -5,6 +5,7 @@
   height: auto;
   transition: all 0.2s;
   cursor: pointer;
+  user-select: none;
 }
 
 .settingsBtn:hover {

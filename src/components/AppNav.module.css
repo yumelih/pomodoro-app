@@ -9,6 +9,7 @@
   margin: 4rem auto;
   border-radius: 10rem;
   padding: 0.2rem;
+  scale: 1;
 }
 
 .list__item {
@@ -17,7 +18,7 @@
 }
 
 .list__itemActive {
-  background-color: var(--accent-red-color);
+  background-color: var(--accent-main-color);
   color: var(--text-dark-color);
   border-radius: 10rem;
   border: none;

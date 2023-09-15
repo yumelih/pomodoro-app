@@ -5,8 +5,13 @@
   --accent-red-color: #f25f4c;
   --accent-blue-color: #3772ff;
   --accent-purple-color: #d63af9;
+  --accent-main-color: #f25f4c;
   --text-light-color: #72757e;
   --text-dark-color: #121629;
+  --main-font: "Oswald", sans-serif;
+  --alternative-font1: "Oswald", sans-serif;
+  --alternative-font2: "Bebas Neue", sans-serif;
+  --alternative-font3: "Satisfy", cursive;
 }
 
 *,
@@ -26,9 +31,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--main-font);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-image: linear-gradient(

@@ -9,3 +9,7 @@
 
   background: linear-gradient(to right bottom, #111423, #1c2138);
 }
+
+.CircularProgressbar-trail {
+  stroke: red;
+}

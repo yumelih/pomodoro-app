@@ -95,15 +95,15 @@
 }
 
 .modal__font1 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--alternative-font1);
 }
 
 .modal__font2 {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: var(--alternative-font2);
 }
 
 .modal__font3 {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--alternative-font3);
 }
 
 .modal__color {
@@ -147,7 +147,7 @@
 
 .modal__submit {
   position: absolute;
-  bottom: -25%;
+  bottom: -20%;
   left: 35%;
   border: none;
   padding: 1.5rem 5rem;

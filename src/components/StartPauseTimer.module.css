@@ -8,6 +8,7 @@
   letter-spacing: 1rem;
   cursor: pointer;
   user-select: none;
+  font-family: var(--main-font);
 }
 
 .btn:hover {
