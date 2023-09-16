@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { usePersistReducer } from "use-persist";
 
 const TimerContext = createContext();
 
@@ -37,7 +38,25 @@ function reducer(state, action) {
         isDropdownOpen: false,
       };
     case "timer/selectphase": {
-      return { ...state, phase: action.payload };
+      const currentPhase = action.payload;
+      let selectedMinutes;
+      let secondsRemaining;
+      if (currentPhase === "long break") {
+        selectedMinutes = state.userSelected.time.longBreakTime;
+        secondsRemaining = selectedMinutes * 60;
+      } else if (currentPhase === "short break") {
+        selectedMinutes = state.userSelected.time.shortBreakTime;
+        secondsRemaining = selectedMinutes * 60;
+      } else {
+        selectedMinutes = state.userSelected.time.pomodoroTime;
+        secondsRemaining = selectedMinutes * 60;
+      }
+      return {
+        ...state,
+        phase: action.payload,
+        secondsRemaining,
+        selectedMinutes,
+      };
     }
     case "timer/pomodoroend":
       const updatedPomodoroCount = state.pomodoroCount + 1;
@@ -145,7 +164,7 @@ function TimerProvider({ children }) {
     function () {
       let selectedFont;
       if (userSelected.font === "system-ui") {
-        selectedFont = "Satisfy', cursive";
+        selectedFont = "Amatic SC, cursive";
       } else if (userSelected.font === "serif") {
         selectedFont = "Bebas Neue, sans-serif";
       } else {
