@@ -3,6 +3,10 @@ import { usePersistReducer } from "use-persist";
 
 const TimerContext = createContext();
 
+const config = {
+  key: "timer",
+};
+
 const initialState = {
   isRunning: false,
   isDropdownOpen: false,
@@ -122,7 +126,7 @@ function TimerProvider({ children }) {
       userSelected,
     },
     dispatch,
-  ] = useReducer(reducer, initialState);
+  ] = usePersistReducer(config, reducer, initialState);
 
   useEffect(
     function () {
